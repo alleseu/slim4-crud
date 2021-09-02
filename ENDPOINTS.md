@@ -4,7 +4,7 @@
 |:--|:--|
 |GET|**/api/productos**|
 |GET|**/api/categorias**|
-|GET|**/api/producto/obtener/{id}**|
-|POST|**/api/producto/crear**|
-|PUT|**/api/producto/actualizar/{id}**|
-|DELETE|**/api/producto/eliminar/{id}**|
+|GET|**/api/producto/{id}**|
+|POST|**/api/producto**|
+|PUT|**/api/producto/{id}**|
+|DELETE|**/api/producto/{id}**|

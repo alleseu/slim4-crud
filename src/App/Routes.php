@@ -6,18 +6,18 @@ use Slim\Routing\RouteCollectorProxy;
 
 
 $app->group('/api', function(RouteCollectorProxy $group) {
-	$group->get('/productos','App\Controllers\MantenedorController:obtenerProductos');
+	$group->get('/productos', 'App\Controllers\MantenedorController:obtenerProductos');
 
-	$group->get('/categorias','App\Controllers\MantenedorController:obtenerCategorias');
+	$group->get('/categorias', 'App\Controllers\MantenedorController:obtenerCategorias');
 });
 
 
 $app->group('/api/producto', function(RouteCollectorProxy $group) {
-	$group->get('/obtener/{id}','App\Controllers\MantenedorController:obtenerProducto');
+	$group->get('/{id}', 'App\Controllers\MantenedorController:obtenerProducto');
 
-	$group->post('/crear','App\Controllers\MantenedorController:crearProducto');
+	$group->post('', 'App\Controllers\MantenedorController:crearProducto');
 
-	$group->put('/actualizar/{id}','App\Controllers\MantenedorController:actualizarProducto');
+	$group->put('/{id}', 'App\Controllers\MantenedorController:actualizarProducto');
 
-	$group->delete('/eliminar/{id}','App\Controllers\MantenedorController:eliminarProducto');
+	$group->delete('/{id}', 'App\Controllers\MantenedorController:eliminarProducto');
 });

@@ -19,7 +19,7 @@ class MantenedorController extends BaseController {
 				'data' => $data
 			];
 
-			$codigo = 200;  //Código de estado de respuesta HTTP, OK.
+			$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
 		}
 		else {
 
@@ -28,13 +28,13 @@ class MantenedorController extends BaseController {
 				'mensaje' => 'No existen productos.'
 			];
 
-			$codigo = 404;  //Código de estado de respuesta HTTP, Not Found.
+			$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
 		return $response
 			->withHeader('content-type', 'application/json')
-			->withStatus($codigo);
+			->withStatus($codigo_http);
 	}
 
 
@@ -52,7 +52,7 @@ class MantenedorController extends BaseController {
 				'data' => $data
 			];
 
-			$codigo = 200;  //Código de estado de respuesta HTTP, OK.
+			$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
 		}
 		else {
 
@@ -61,13 +61,13 @@ class MantenedorController extends BaseController {
 				'mensaje' => 'No existen categorías.'
 			];
 
-			$codigo = 404;  //Código de estado de respuesta HTTP, Not Found.
+			$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
 		return $response
 			->withHeader('content-type', 'application/json')
-			->withStatus($codigo);
+			->withStatus($codigo_http);
 	}
 
 
@@ -91,7 +91,7 @@ class MantenedorController extends BaseController {
 					'data' => $data
 				];
 
-				$codigo = 200;  //Código de estado de respuesta HTTP, OK.
+				$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
 			}
 			else {
 
@@ -100,7 +100,7 @@ class MantenedorController extends BaseController {
 					'mensaje' => 'El producto no existe.'
 				];
 
-				$codigo = 404;  //Código de estado de respuesta HTTP, Not Found.
+				$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
 			}
 		}
 		else {
@@ -110,27 +110,27 @@ class MantenedorController extends BaseController {
 				'mensaje' => 'Dato no numérico.'
 			];
 
-			$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
 		return $response
 			->withHeader('content-type', 'application/json')
-			->withStatus($codigo);
+			->withStatus($codigo_http);
 	}
 
 
 	//FUNCIÓN PARA PROCESAR LA CREACÍON DE UN PRODUCTO NUEVO.
 	public function crearProducto($request, $response, $args) {
 
-		//Se obtienen los datos recibidos.
-		$post = $request->getQueryParams();
-		$codigo = $post['codigo'];
-		$nombre = $post['nombre'];
-		$categoria = $post['categoria'];
-
 		//Comprueba que los datos recibidos no están vacíos.
-		if (!empty($codigo) && !empty($nombre) && !empty($categoria)) {
+		if (!empty($request->getQueryParams())) {
+
+			//Se obtienen los datos recibidos.
+			$post = $request->getQueryParams();
+			$codigo = $post['codigo'];
+			$nombre = $post['nombre'];
+			$categoria = $post['categoria'];
 
 			//Comprueba que todos los caracteres en las strings entregadas, son numéricos.
 			if (ctype_digit($codigo) && ctype_digit($categoria)) {
@@ -156,7 +156,7 @@ class MantenedorController extends BaseController {
 								'mensaje' => 'El producto fue creado exitosamente.'
 							];
 
-							$codigo = 201;  //Código de estado de respuesta HTTP, Created.
+							$codigo_http = 201;  //Código de estado de respuesta HTTP, Created.
 						}
 						else {
 
@@ -165,7 +165,7 @@ class MantenedorController extends BaseController {
 								'mensaje' => 'El código del producto ya existe.'
 							];
 
-							$$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+							$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 						}
 					}
 					else {
@@ -175,7 +175,7 @@ class MantenedorController extends BaseController {
 							'mensaje' => 'La categoría del producto no existe.'
 						];
 
-						$codigo = 404;  //Código de estado de respuesta HTTP, Not Found.
+						$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
 					}
 				}
 				else {
@@ -185,7 +185,7 @@ class MantenedorController extends BaseController {
 						'mensaje' => 'Longitud inválida.'
 					];
 
-					$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+					$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 				}
 			}
 			else {
@@ -195,7 +195,7 @@ class MantenedorController extends BaseController {
 					'mensaje' => 'Dato no numérico.'
 				];
 
-				$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+				$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 			}
 		}
 		else {
@@ -205,13 +205,13 @@ class MantenedorController extends BaseController {
 				'mensaje' => 'Dato nulo.'
 			];
 
-			$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
 		return $response
 			->withHeader('content-type', 'application/json')
-			->withStatus($codigo);
+			->withStatus($codigo_http);
 	}
 
 
@@ -221,14 +221,14 @@ class MantenedorController extends BaseController {
 		//Se obtiene el dato recibido por la URI.
 		$id = $args['id'];
 
-		//Se obtienen los otros datos recibidos.
-		$post = $request->getQueryParams();
-		$codigo = $post['codigo'];
-		$nombre = $post['nombre'];
-		$categoria = $post['categoria'];
-
 		//Comprueba que los datos recibidos no están vacíos.
-		if (!empty($codigo) && !empty($nombre) && !empty($categoria)) {
+		if (!empty($request->getQueryParams())) {
+
+			//Se obtienen los otros datos recibidos.
+			$post = $request->getQueryParams();
+			$codigo = $post['codigo'];
+			$nombre = $post['nombre'];
+			$categoria = $post['categoria'];
 
 			//Comprueba que todos los caracteres en las strings entregadas, son numéricos.
 			if (ctype_digit($id) && ctype_digit($codigo) && ctype_digit($categoria)) {
@@ -254,7 +254,7 @@ class MantenedorController extends BaseController {
 								'mensaje' => 'El producto fue actualizado exitosamente.'
 							];
 
-							$codigo = 201;  //Código de estado de respuesta HTTP, Created.
+							$codigo_http = 201;  //Código de estado de respuesta HTTP, Created.
 						}
 						else {
 
@@ -263,7 +263,7 @@ class MantenedorController extends BaseController {
 								'mensaje' => 'El código del producto ya existe.'
 							];
 
-							$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+							$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 						}
 					}
 					else {
@@ -273,7 +273,7 @@ class MantenedorController extends BaseController {
 							'mensaje' => 'La categoría del producto no existe.'
 						];
 
-						$codigo = 404;  //Código de estado de respuesta HTTP, Not Found.
+						$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
 					}
 				}
 				else {
@@ -283,7 +283,7 @@ class MantenedorController extends BaseController {
 						'mensaje' => 'Longitud inválida.'
 					];
 
-					$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+					$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 				}
 			}
 			else {
@@ -293,7 +293,7 @@ class MantenedorController extends BaseController {
 					'mensaje' => 'Dato no numérico.'
 				];
 
-				$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+				$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 			}
 		}
 		else {
@@ -303,13 +303,13 @@ class MantenedorController extends BaseController {
 				'mensaje' => 'Dato nulo.'
 			];
 
-			$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
 		return $response
 			->withHeader('content-type', 'application/json')
-			->withStatus($codigo);
+			->withStatus($codigo_http);
 	}
 
 
@@ -335,7 +335,7 @@ class MantenedorController extends BaseController {
 					'mensaje' => 'El producto fue eliminado exitosamente.'
 				];
 
-				$codigo = 200;  //Código de estado de respuesta HTTP, OK.
+				$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
 			}
 			else {
 
@@ -344,7 +344,7 @@ class MantenedorController extends BaseController {
 					'mensaje' => 'El producto no existe.'
 				];
 
-				$codigo = 404;  //Código de estado de respuesta HTTP, Not Found.
+				$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
 			}
 		}
 		else {
@@ -354,12 +354,12 @@ class MantenedorController extends BaseController {
 				'mensaje' => 'Dato no numérico.'
 			];
 
-			$codigo = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
 		return $response
 			->withHeader('content-type', 'application/json')
-			->withStatus($codigo);
+			->withStatus($codigo_http);
 	}
 }

@@ -19,11 +19,14 @@ class ProductoModel {
 					   prCodigo AS codigo,
 					   prNombre AS producto,
 					   prCategoria AS idCategoria,
-					   caDescripcion AS nombreCategoria
+					   caDescripcion AS nombreCategoria,
+					   prCreated AS fechaCreacion,
+					   prUpdated AS fechaActualizacion
 				FROM producto,
 					 categoria
 				WHERE prCategoria = caId
-				  AND prDeleted IS NULL";
+				  AND prDeleted IS NULL
+				ORDER BY prCodigo ASC";
 
 		$query = $this->pdo->query($sql);  //Ejecuta una sentencia SQL, devolviendo un conjunto de resultados como un objeto PDOStatement.
 		
@@ -37,7 +40,9 @@ class ProductoModel {
 		$sql = "SELECT prCodigo AS codigo,
 					   prNombre AS producto,
 					   prCategoria AS idCategoria,
-					   caDescripcion AS nombreCategoria
+					   caDescripcion AS nombreCategoria,
+					   prCreated AS fechaCreacion,
+					   prUpdated AS fechaActualizacion
 				FROM producto,
 					 categoria
 				WHERE prCategoria = caId
