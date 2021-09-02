@@ -18,7 +18,7 @@ class CategoriaModel{
 		$sql = "SELECT caId AS id,
 					   caDescripcion AS descripcion
 				FROM categoria
-				ORDER BY caDescripcion ASC";
+				ORDER BY caId ASC";
 
 		$query = $this->pdo->query($sql);
 
