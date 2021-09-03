@@ -34,6 +34,11 @@ $RECYCLE.BIN/
 .Trash-*
 
 #-------------------------
+# Dependencies
+#-------------------------
+/vendor
+
+#-------------------------
 # Temporary Files
 #-------------------------
 *.log
@@ -62,6 +67,7 @@ nbproject/
 build/
 nbbuild/
 nbdist/
+dist/
 nbactions.xml
 nb-configuration.xml
 .nb-gradle/
