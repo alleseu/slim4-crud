@@ -5,13 +5,22 @@
 - Slim versión: `4.5`
 
 ___
-### Requisitos para ejecutar la api
-- Clonar proyecto con el nombre del repositorio por defecto, o si lo renombra, debe cambiar la ruta base del archivo `App.php` ubicado en el directorio `src/App`, por el nuevo nombre.
-- Crear una base de datos en Mysql con el nombre `crud`.
-- Luego, importar el archivo `database.sql` ubicado en el directorio `resource`.
+### Requisitos para instalar la API
+- Clonar proyecto con el nombre del repositorio por defecto. Si desea renombrarlo, debe cambiar la ruta base del archivo `App.php` ubicado en el directorio `src/App`, por el nuevo nombre.
+- Crear una base de datos en Mysql con el nombre `crud`. Luego, debe importar el archivo `database.sql` ubicado en el directorio `resource`.
 - Instalar los paquetes especificados en el fichero composer.json con:
-	- composer require
-	- composer dump-autoload
+
+	```text
+	composer install
+	```
+	```text
+	composer dump-autoload
+	```
+
+___
+### Ejecución de la API
+- Los endpoints disponibles en la API, estan definidos en el archivo `ENDPOINTS.md`.
+- Para testear los endpoints directamente en Postman, debe importar el archivo `slim4-crud.postman_collection.json` ubicado en el directorio `resource`.
 
 ___
 ### Link de recursos
