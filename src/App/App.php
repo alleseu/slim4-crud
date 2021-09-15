@@ -27,11 +27,16 @@ date_default_timezone_set('America/Santiago');
 require __DIR__ . "/Configs.php";
 require __DIR__ . "/Dependencies.php";
 require __DIR__ . "/Loggers.php";
+require __DIR__ . "/Middlewares.php";
 require __DIR__ . "/Routes.php";
 require __DIR__ . "/Models.php";
 
 
-//Agrega el Error Middleware con Logger, genera un archivo log.
+//Agrega los Middlewares de cierre.
+$app->add($beforeMiddleware);
+//$app->add($afterMiddleware);
+
+//Agrega el Middleware de error con Logger, genera un archivo log.
 $logger = $container->get('logger_files');
 $errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
 
