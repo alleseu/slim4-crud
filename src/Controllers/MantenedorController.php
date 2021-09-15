@@ -14,21 +14,13 @@ class MantenedorController extends BaseController {
 		//Comprueba que el dato obtenido no está vacío.
 		if (!empty($data)) {
 
-			$respuesta = [
-				'resultado' => 'EXITO',
-				'data' => $data
-			];
-
 			$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
+			$respuesta['data'] = $data;
 		}
 		else {
 
-			$respuesta = [
-				'resultado' => 'ERROR_VALIDACION',
-				'mensaje' => 'No existen productos.'
-			];
-
 			$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
+			$respuesta['mensaje'] = 'No existen productos.';
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
@@ -47,21 +39,13 @@ class MantenedorController extends BaseController {
 		//Comprueba que el dato obtenido no está vacío.
 		if (!empty($data)) {
 
-			$respuesta = [
-				'resultado' => 'EXITO',
-				'data' => $data
-			];
-
 			$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
+			$respuesta['data'] = $data;
 		}
 		else {
 
-			$respuesta = [
-				'resultado' => 'ERROR_VALIDACION',
-				'mensaje' => 'No existen categorías.'
-			];
-
 			$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
+			$respuesta['mensaje'] = 'No existen categorías.';
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
@@ -86,31 +70,19 @@ class MantenedorController extends BaseController {
 			//Comprueba que el dato obtenido no está vacío.
 			if (!empty($data)) {
 
-				$respuesta = [
-					'resultado' => 'EXITO',
-					'data' => $data
-				];
-
 				$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
+				$respuesta['data'] = $data;
 			}
 			else {
 
-				$respuesta = [
-					'resultado' => 'ERROR_VALIDACION',
-					'mensaje' => 'El producto no existe.'
-				];
-
 				$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
+				$respuesta['mensaje'] = 'El producto no existe.';
 			}
 		}
 		else {
 
-			$respuesta = [
-				'resultado' => 'ERROR_ENTRADA',
-				'mensaje' => 'Dato no numérico.'
-			];
-
 			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Dato no numérico.';
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
@@ -151,61 +123,37 @@ class MantenedorController extends BaseController {
 							//LLAMA A LA FUNCIÓN PARA INSERTAR UN PRODUCTO NUEVO.
 							$this->container->get('modelo_producto')->insertar($codigo, $nombre, $categoria);
 
-							$respuesta = [
-								'resultado' => 'EXITO',
-								'mensaje' => 'El producto fue creado exitosamente.'
-							];
-
 							$codigo_http = 201;  //Código de estado de respuesta HTTP, Created.
+							$respuesta['mensaje'] = 'El producto fue creado exitosamente.';
 						}
 						else {
 
-							$respuesta = [
-								'resultado' => 'ERROR_VALIDACION',
-								'mensaje' => 'El código del producto ya existe.'
-							];
-
 							$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+							$respuesta['mensaje'] = 'El código del producto ya existe.';
 						}
 					}
 					else {
 
-						$respuesta = [
-							'resultado' => 'ERROR_VALIDACION',
-							'mensaje' => 'La categoría del producto no existe.'
-						];
-
 						$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
+						$respuesta['mensaje'] = 'La categoría del producto no existe.';
 					}
 				}
 				else {
 
-					$respuesta = [
-						'resultado' => 'ERROR_ENTRADA',
-						'mensaje' => 'Longitud inválida.'
-					];
-
 					$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+					$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Longitud inválida.';
 				}
 			}
 			else {
 
-				$respuesta = [
-					'resultado' => 'ERROR_ENTRADA',
-					'mensaje' => 'Dato no numérico.'
-				];
-
 				$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+				$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Dato no numérico.';
 			}
 		}
 		else {
 
-			$respuesta = [
-				'resultado' => 'ERROR_ENTRADA',
-				'mensaje' => 'Dato nulo.'
-			];
-
 			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Dato nulo.';
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
@@ -249,61 +197,37 @@ class MantenedorController extends BaseController {
 							//LLAMA A LA FUNCIÓN PARA ACTUALIZAR UN PRODUCTO.
 							$this->container->get('modelo_producto')->actualizar($id, $codigo, $nombre, $categoria);
 
-							$respuesta = [
-								'resultado' => 'EXITO',
-								'mensaje' => 'El producto fue actualizado exitosamente.'
-							];
-
 							$codigo_http = 201;  //Código de estado de respuesta HTTP, Created.
+							$respuesta['mensaje'] = 'El producto fue actualizado exitosamente.';
 						}
 						else {
 
-							$respuesta = [
-								'resultado' => 'ERROR_VALIDACION',
-								'mensaje' => 'El código del producto ya existe.'
-							];
-
 							$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+							$respuesta['mensaje'] = 'El código del producto ya existe.';
 						}
 					}
 					else {
 
-						$respuesta = [
-							'resultado' => 'ERROR_VALIDACION',
-							'mensaje' => 'La categoría del producto no existe.'
-						];
-
 						$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
+						$respuesta['mensaje'] = 'La categoría del producto no existe.';
 					}
 				}
 				else {
 
-					$respuesta = [
-						'resultado' => 'ERROR_ENTRADA',
-						'mensaje' => 'Longitud inválida.'
-					];
-
 					$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+					$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Longitud inválida.';
 				}
 			}
 			else {
 
-				$respuesta = [
-					'resultado' => 'ERROR_ENTRADA',
-					'mensaje' => 'Dato no numérico.'
-				];
-
 				$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+				$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Dato no numérico.';
 			}
 		}
 		else {
 
-			$respuesta = [
-				'resultado' => 'ERROR_ENTRADA',
-				'mensaje' => 'Dato nulo.'
-			];
-
 			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Dato nulo.';
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
@@ -330,31 +254,19 @@ class MantenedorController extends BaseController {
 				//LLAMA A LA FUNCIÓN PARA ELIMINAR UN PRODUCTO. (NO ELIMINA EL REGISTRO, SOLO ACTUALIZA LA FECHA).
 				$this->container->get('modelo_producto')->eliminar($id);
 
-				$respuesta = [
-					'resultado' => 'EXITO',
-					'mensaje' => 'El producto fue eliminado exitosamente.'
-				];
-
 				$codigo_http = 200;  //Código de estado de respuesta HTTP, OK.
+				$respuesta['mensaje'] = 'El producto fue eliminado exitosamente.';
 			}
 			else {
 
-				$respuesta = [
-					'resultado' => 'ERROR_VALIDACION',
-					'mensaje' => 'El producto no existe.'
-				];
-
 				$codigo_http = 404;  //Código de estado de respuesta HTTP, Not Found.
+				$respuesta['mensaje'] = 'El producto no existe.';
 			}
 		}
 		else {
 
-			$respuesta = [
-				'resultado' => 'ERROR_ENTRADA',
-				'mensaje' => 'Dato no numérico.'
-			];
-
 			$codigo_http = 400;  //Código de estado de respuesta HTTP, Bad Request.
+			$respuesta['mensaje'] = 'Parámetro de entrada erroneo. Dato no numérico.';
 		}
 		
 		$response->getBody()->write(json_encode($respuesta));
